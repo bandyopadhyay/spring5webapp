@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Book {
@@ -18,7 +19,17 @@ public class Book {
     private Long id;
     private String title;
     private String isdn;
-    private String publisher;
+    @OneToOne
+    private Publisher publisher;
+
+    public Book(String title, String isdn, String publisher) {
+
+        this.title = title;
+        this.isdn = isdn;
+    }
+
+
+
     @ManyToMany
     @JoinTable(name= "author_book", joinColumns = @JoinColumn(name = "book_id") ,
     inverseJoinColumns = @JoinColumn(name = "author_id"))
@@ -48,20 +59,20 @@ public class Book {
         this.isdn = isdn;
     }
 
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
     public Set<Author> getAuthors() {
         return authors;
     }
 
     public void setAuthors(Set<Author> authors) {
         this.authors = authors;
+    }
+
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
     }
 
     @Override
@@ -77,7 +88,7 @@ public class Book {
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override
@@ -86,7 +97,6 @@ public class Book {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", isdn='" + isdn + '\'' +
-                ", publisher='" + publisher + '\'' +
                 ", authors=" + authors +
                 '}';
     }

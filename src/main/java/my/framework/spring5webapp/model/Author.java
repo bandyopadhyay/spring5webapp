@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Author {
@@ -21,6 +22,8 @@ public class Author {
     @ManyToMany(mappedBy = "authors")
     private Set<Book> books = new HashSet<>();
 
+
+
     public Author(String fName, String lName) {
         this.fName = fName;
         this.lName = lName;
@@ -31,6 +34,7 @@ public class Author {
         this.lName = lName;
         this.books = books;
     }
+
 
     public Author(){
 
@@ -67,6 +71,8 @@ public class Author {
     public void setId(Long id) {
         this.id = id;
     }
+
+
 
     @Override
     public boolean equals(Object o) {
