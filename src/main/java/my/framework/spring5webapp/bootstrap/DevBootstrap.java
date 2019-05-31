@@ -11,9 +11,7 @@ import my.framework.spring5webapp.repositories.AuthorRepository;
 import my.framework.spring5webapp.repositories.BookRepository;
 import my.framework.spring5webapp.repositories.PublisherRepository;
 
-/**
- * Created by bandyopadh on 2/25/19.
- */
+
 @Component
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>{
 
